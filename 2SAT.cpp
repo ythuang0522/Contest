@@ -4,6 +4,8 @@
 //#include <map>
 using namespace std;
 
+#define SIZE  2*500+1
+
 typedef vector<int> Graph;
 
 // running 1st DFS on the reverse graph
@@ -94,8 +96,8 @@ int main()
     for(int i=0; i<numT; i++)
     {
         scanf("%d %d", &N, &M);
+        //printf("%d %d\n", N, M);
 
-        int const SIZE = 2*N + 1;
         // Assuming vertices are labeled 1...V,
         Graph G[SIZE], Grev[SIZE];  //adjacent matrix
 
@@ -126,13 +128,13 @@ int main()
         int t = 0;  // finish time stamp
         int finish[SIZE];   // finish time of each vertex
         int order[SIZE];    // sorted finish time of each vertex
-        for(i=2*N; i>0; i--)
+        for(int j=2*N; j>0; j--)
         {
-            if(!explored[i])
-                dfs_reverse(Grev, t, explored, finish, i);
+            if(!explored[j])
+                dfs_reverse(Grev, t, explored, finish, j);
 
             // Bucket sort on finish time into order
-            order[finish[i]] = i;
+            order[finish[j]] = j;
         }
 
         // 2nd run DFS on the actual graph in forward postorder
@@ -141,11 +143,11 @@ int main()
         int leader[SIZE];   // component ID is represented by the parent index
 
         // starting DFS from the largest finish time in order[]
-        for(i=2*N; i>0; i--)
-            if(!explored[order[i]])
+        for(int j=2*N; j>0; j--)
+            if(!explored[order[j]])
             {
-                parent = order[i];  // parent is the index of starting vertex of each DFS
-                dfs(G, explored, leader, parent, order[i]);
+                parent = order[j];  // parent is the index of starting vertex of each DFS
+                dfs(G, explored, leader, parent, order[j]);
             }
         /*
             printf("Original graph :\n");
@@ -169,9 +171,10 @@ int main()
         */
         // check if a variable and its complement belong in the same SCC in reverse postorder
         // map <int, bool> truthAssignment;
-        for(i=2*N; i>0; i--)
+        int same;
+        for(same=2*N; same>0; same--)
         {
-            u = order[i];
+            u = order[same];
             if(u > N)
             {
                 if(stronglyConnected(leader, u, u-N)) break;
@@ -193,14 +196,14 @@ int main()
             }
         }
 
-        if(i > 0)
+        if(same > 0)
             printf("No\n");
         else
         {
             printf("Yes\n");
 
-            //        for(i=1; i<=N; i++)
-            //            printf("%d : %s\n", i, truthAssignment[leader[i]] ? "true" : "false");
+            //        for(int j=1; j<=N; j++)
+            //            printf("%d : %s\n", j, truthAssignment[leader[j]] ? "true" : "false");
         }
     }
 
