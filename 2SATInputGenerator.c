@@ -9,6 +9,8 @@ int main()
     int numT;
 
     scanf("%d", &numT);
+    printf("%d\n", numT);
+
     for(int i=0; i<numT; i++)
     {
         int N=(rand()%500)+1;
