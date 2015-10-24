@@ -109,7 +109,7 @@ int main()
                 -x is the complement of a variable x
             */
             scanf(" %d %c %d", &u, &op, &v);
-            printf("%d %c %d\n", u, op, v);
+            // printf("%d %c %d\n", u, op, v);
 
             if(op == '+')
                 addORClauses(G, Grev, N, u, v);
