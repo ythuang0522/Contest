@@ -1,0 +1,25 @@
+\documentclass[12pt]{article}
+
+\usepackage{epsfig}
+
+\begin{document}
+
+\title{Solution to Problem Magnetic Stones}
+\author{}
+\date{}
+\maketitle
+
+\section{Key Ideas for Solution}
+
+The problem can be solved by dynamic programming on folding the substrings of length $L$, where $1 \le L \le n$ and $n$ is the length of the original string. 
+Let $S[i,j]$ be the optimal released energy of folding substring $S[i,j]$. $S[i,j]$ can be computed by picking the maximum of 
+  \begin{enumerate}
+  \item $S[i+1,j-1]+2$ or -1, depending on whether $S[i]$ attracts or repels $S[j]$, respectively.
+  \item $S[i+1,j]-1$.
+  \item $S[i,j-1]-1$. 
+  \item $\max_{i < k < j}\{S[i,k]+S[k+1,j]\}$. This recusion is for computing optimal energy of two or more folding hairpins.
+  
+  \end{enumerate}
+The optimal solution is thus $S[1,n]$. 
+
+\end{document}

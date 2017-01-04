@@ -1,0 +1,24 @@
+\documentclass[12pt]{article}
+
+\usepackage{epsfig}
+
+\begin{document}
+
+\title{Solution to All Rectangles}
+\author{}
+\date{}
+\maketitle
+
+\section{Key Ideas for Solution}
+
+The problem can be solved by recursively enumerating rectangles at the four corners until the boundary conditions are reached. e.g., if the size of the largest rectangle is given as 8, then the following rectangles would be produced.
+
+        \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.6]{Rectangle.eps}
+        \label{fig:fig3.3}
+        \end{figure}
+        
+Note that the center of the first rectangle starts at (1024, 1024) of the grid. Given the centered coordinate of a rectangle, a counter variable is incremented only if the specified point is within the boundaries of that rectangle. Subsequently, we compute the coordinates of the four corners and recursively repeat the above process for each rectangle centered at the corner, until either the boundary of grids are reached or the size parameter $k$ is less than 1. At the end, the counter variable will record the number of rectangles containing the specified point.
+
+\end{document}
